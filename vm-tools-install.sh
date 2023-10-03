@@ -11,6 +11,6 @@ elif ["$choice" -eq 2]; then
 elif ["$choice" -eq 3]; then
         # installing UTM tools
         sudo apt install sprice-vdagent spice-webdavd -y
-else; then
+else then
     echo "Invalid choice"
 fi
