@@ -6,14 +6,17 @@ read -p "Enter your choice: " choice
 case "$choice" in 
     1) sudo apt install -y git python3 vim curl wget htop 
     ;;
-    2) sudo apt install -y nmap net-tools aircrack-ng burpsuite wireshark ettercap-text-only john hydra nikto sqlmap
+    2) sudo apt install -y nmap net-tools aircrack-ng wireshark ettercap-text-only john hydra nikto sqlmap
     curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb > msfinstall && \chmod 755 msfinstall && \./msfinstall
     ;;
-    3) sudo apt install -y git python3 vim curl wget htop nmap net-tools metasploit-framework aircrack-ng burpsuite wireshark ettercap-text-only john hydra nikto sqlmap 
+    3) sudo apt install -y git python3 vim curl wget htop nmap net-tools aircrack-ng wireshark ettercap-text-only john hydra nikto sqlmap 
+    curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb > msfinstall && \chmod 755 msfinstall && \./msfinstall
     ;;
     *) echo "Invalid choice" 
     ;;
-esac 
+esac
+
+sudo apt install openjdk-11-jre -y
 
 
 
