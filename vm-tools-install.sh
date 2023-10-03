@@ -2,13 +2,13 @@
 echo " For WMWare [1] \n For VirtualBox [2] \n For UTM [3]"
 read -p "Enter your choice: " choice
 
-if ["$choice" = 1]
+if ["$choice" = 1]; then
         # installing vmware tools
         sudo apt install open-vm-tools-desktop open-vm-tools -y
-elif ["$choice" = 2]
+elif ["$choice" = 2] then
         # installing Virtualbox tools
         sudo apt install virtualbox-guest-utils virtualbox-guest-x11 virtualbox-guest-dkms -y
-elif ["$choice" = 3]
+elif ["$choice" = 3] then
         # installing UTM tools
         sudo apt install sprice-vdagent spice-webdavd -y
 else
