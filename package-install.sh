@@ -1,6 +1,6 @@
 echo "basic bundle [1] (git python3 vim curl wget htop)\n 
-    hacking bundle [2] (nmap net-tools metasploit-framework aircrack-ng burpsuite wireshark ettercap-text-only john hydra nikto sqlmap)\n
-    all bundle [3] \n"
+hacking bundle [2] (nmap net-tools metasploit-framework aircrack-ng burpsuite wireshark ettercap-text-only john hydra nikto sqlmap)\n
+all bundle [3] \n"
 read -p "Enter your choice: " choice
 
 case "$choice" in 
