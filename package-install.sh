@@ -16,7 +16,5 @@ case "$choice" in
     ;;
 esac
 
-sudo apt install openjdk-11-jre -y
-
 
 
