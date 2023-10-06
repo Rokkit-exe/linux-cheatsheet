@@ -1,0 +1,238 @@
+# ** requirement: 1. console cable with drivers installed and plugged to computer and switch (console port) 
+                  2. a software like Putty to connect to the device terminal **
+
+# <---------------------------------------- driver install ---------------------------------------->
+# download console cable drivers
+https://crosemont.moodle.decclic.qc.ca/mod/resource/view.php?id=353974
+
+# open "Device Manager" in windows
+
+1. select the USB device for the console cable
+2. right-click and select "update driver"
+3. select "Browse my computer for driver"
+4. select the parent directory of the driver
+5. clikc "OK"
+
+** if the driver instlled correctly you will see COM3 **
+
+# <--------------------------------------- Putty ------------------------------------------------->
+
+1. open putty 
+2. select "serial"
+3. change to COM3 ** the number can be different**
+4. click "connect"
+
+** different speed [ 9600, 19200, 38400, 57600, 115200 ] **
+
+** you might have to click on "enter" a couple time to see the prompt **
+
+# <--------------------------------------- usefull command windows ------------------------------------------------->
+
+1. ping 192.168.1.0
+
+2. arp -a
+
+3. ipconfig
+
+# <--------------------------------------- usefull command cisco-cli ------------------------------------------------->
+
+1. show ip interface brief
+
+2. show interface F0/1
+
+3. show mac address-table
+
+4. clear mac address-table dynamic
+
+# <--------------------------------------- mode privileges ------------------------------------------------->
+
+1. enable
+
+2. config t
+
+3. no ip domain-lookup
+
+4. hostname [hostname]
+
+5. enable secret [passwd]
+
+6. optionnal: login block-for 120 attempts 3 within 30
+
+7. ip domain-name [domainName]
+
+8. username [username] privilege 15 [password]
+
+9. crypto key generate rsa
+
+10. ip ssh version 2
+
+11. optionnal: banner motd $[message]$
+
+# <--------------------------------------- line console config ------------------------------------------------->
+
+1. line console 0
+
+2. password [password]
+
+3. login local
+
+4. exec-timeout 10
+
+# <--------------------------------------- line vty config ------------------------------------------------->
+
+1.. line vty 0 15
+
+2. password [password]
+
+3. login local
+
+4. transport input ssh
+
+5. service password-encryption
+
+ <--------------------------------------- interface vlan1 config **switch only** ------------------------------------------------->
+
+1. interface vlan 1
+
+2. description [description]
+
+3. ip address [ip] [mask]
+
+4. no shutdown
+
+# <------------- interface up config **switch only** --------------------->
+1. interface FastEthernet 0/1      
+
+2. description [description]        
+
+3. switchport mode access
+
+4. switchport access vlan 1
+
+5. description [description]
+
+# <------------- interface down config **switch only** --------------------->
+
+6. interface range f0/2 - 24
+
+7. description vide
+
+8. shutdown
+
+9. Ctrl-Z
+
+10. write
+
+# <------------- interface up config **routeur only** --------------------->
+1. interface FastEthernet 0/0       
+
+2. description [description]        
+
+3. ip address [192.168.0.1] [255.255.255.0]
+
+4. no shutdown
+
+***** repeat for FastEthernet 0/1 with proper network (172.16.0.1 255.255.255.0) ****
+
+5. Ctrl+Z
+
+6. write
+
+# <------------- reset Switch password --------------------->
+
+Avant de brancher l’alimentation électrique, repérez le bouton « MODE » sur le devant gauche
+du commutateur. Lorsque vous alimenterez le commutateur, maintenez le bouton enfoncez jusqu’à ce
+que les diodes arrêtent de d’allumer et que la diode « System » est la seul qui clignote. Cela peut
+prendre environ 30 à 60 secondes. Les différents modèles : 2950, 2960 peuvent se comporter de
+manière légèrement différentes. Par exemple, sur un modèle la diode peut clignoter vert tandis que sur
+l’autre elle clignote orange pour indiquer que l’on peut relâcher le bouton. Maintenant que vous savez
+quoi faire, allez-y!
+
+Lorsque vous relâcherez le bouton, le système devrait afficher l’invite suivante : switch :
+
+Portez attention, il ne s’agit pas de l’invite habituelle qui se termine par un symbole « > ». Si le
+commutateur semble continuer la séquence de démarrage et fini par aboutir, vous n’avez probablement
+pas tenu le bouton assez longtemps ou assez rapidement au départ ou les deux.
+
+À partir du moment où vous avez accès à l’invite switch : la première étape est d’initialiser la
+carte flash. Un peu comme lorsque vous ajouter un disque dur supplémentaire dans une machine
+virtuelle, le disque est détecté par Windows, mais est « Hors-ligne ». Vous devez l’initialisé pour
+pouvoir créer un volume simple… C’est un peu la même chose. Le commutateur détecte une carte
+flash, mais n’y accède pas tant qu’elle n’a pas été initialisée. Pour initialiser la mémoire flash, entrez la
+commande : flash_init
+
+Vous avez maintenant accès au contenu de la mémoire flash, c’est là où réside l’IOS et le fichier
+de configuration de démarrage (startup-config). Pour afficher le contenu de la mémoire flash, entrez la
+commande : dir flash :
+
+
+# <------------- reset Router password --------------------->
+
+Échangez de routeur avec votre coéquipier, mais ne le mettez pas en marche tout de suite. Vous
+pouvez conservez votre session « putty » originale si vous ne l’avez pas fermée. Sinon, lancez à
+nouveau « putty » et sélectionnez une connexion série. Appuyez sur « Open » pour démarrer la session.
+Faites un clic-droit sur le cadre de la fenêtre de « putty » pour faire apparaître le menu d’option. Vous
+devriez voir « Special commands », puis « Break » comme choix possible. Lorsque vous alimenterez le
+routeur, vous devrez envoyer le signal « Break » au routeur. Le problème, c’est qu’on sait jamais
+vraiment si le routeur était prêt à écouter quand on envoie le signal alors en général on en envoie
+plusieurs. Ça ne prend que quelques secondes pour tomber en mode « rommon ». Si vous voyez
+l’image de l’IOS se décompresser, éteignez le routeur et recommencez.
+
+Vous pouvez essayer des combinaisons de touches comme « Ctrl-Break » ou « Ctrl-B », mais ça
+n’est pas garanti que ça marche. Sinon, vous pouvez utiliser teraterm qui a une combinaison « Alt-B »
+qui fonctionne très bien.
+
+Maintenant que vous êtes au courant, alimentez le routeur et envoyez des « Break ». Si vous y
+parvenez, l’invite de commande devrait être rommon1 > . Pour faire afficher les commandes possibles,
+entrez «? » ou « help » suivis de la touche « Entrée ». Notez que l’invite change pour : rommon 2 > .
+Le chiffre continuera d’incrémenter.
+
+Pour modifier la valeur du registre, entrez la commande : confreg 0x2142
+** La valeur par défaut est 0x2102. La valeur « 4 » avec le 6e
+ bit (c’est de l’hexa hein!?! allez voir la référence)
+indique que les fichiers de configuration seront ignorés.
+
+À la prochaine invite de commande, entrez : reset pour redémarrer le routeur. Laissez le routeur
+redémarrer sans interruption. une fois le démarrage terminé, une message vous proposant de démarrer
+la configuration de base à l’aide de l’assistant interactif. Entrez « n » pour « no » puis appuyez sur
+« Entrée ». Le système affiche un message vous indiquant d’appuyer sur « Entrée » pour commencer
+s’affiche. Appuyez sur « Entrée »; l’invite de commande s’affiche : Router>
+
+Entrez la commande enable pour passer au mode privilégié. Encore-là, aucun mot de passe ne
+vous est demandé puisque qu’aucune configuration n’est chargée.
+
+**À partir de ce point, réalisez une chose : vous êtes un utilisateur ayant les pleins pouvoirs (niveau 15). Vous avez
+également déjà franchi les barrières de sécurité qui auraient pu être mises en place : mot de passe sur le port console, mot de
+passe secret seul pour le mode privilégié ou en utilisant un utilisateur local,… Vous pourriez donc recréer une toute nouvelle
+configuration, la sauvegarder et remettre la valeur par défaut du registre,. Au prochain démarrage sans interruption, cette
+configuration serait chargée et vous seriez en possession des mots de passe,…
+
+L’affaire c’est qu’il y a déjà tout un fichier de configuration qui vous a pris du temps à
+construire et tester; ça serait plate de le perdre. Faites afficher la configuration en cours avec la
+commande : show running-config . Comme prévu, le fichier de configuration est vide… ou presque.
+
+Depuis le mode privilégié, copiez le fichier de démarrage dans le fichier de configuration en
+cours avec la commande : copy startup-config running-config . Remarquez que d’habitude vous
+faites l’inverse. Refaites afficher la configuration en cours. Maintenant, il y a quelques choses de plus.
+Des mots de passe ici et là, un utilisateur des description,...
+
+Je ne sais pas si vous réalisez, mais vous n’avez qu’à écraser les mots de passe de la
+configuration, sauvegarder les changements et le tour est joué! Entrez la commande :configure
+terminal pour passer au mode de configuration global.
+
+Une fois en mode de configuration, entrez la commande : no enable secret .Vous venez
+d’enlever le mot de passe qui protège l’accès au mode privilégié (mais vous étiez déjà en mode
+privilégié!!). Entrez la commande : enable secret votre_mot_de_passe_secret et vous venez de mettre
+un nouveau mot de passe que vous connaissez. Allez en sous-mode de configuration de ligne de
+console et de lignes virtuelles et modifiez les mots de passe avec la commande : no password pour
+supprimer un mot de passe. Supprimez l’utilisateur local avec la commande : no username
+nom_de_l’utilisateur et créez-en un nouveau.
+
+Avant de terminer, vous devez modifier à nouveau la valeur du registre sinon, le routeur
+ignorera le fichier de configuration. Depuis le mode de configuration global, entrez la commande :
+config-register 0x2102
+
+** Ben oui,… en « rommon » c’est confreg pis en mode normal c’est config-register !!!
+
+Sauvegardez vos modifications avec la commande : copy running-config startup-config
+Entrez la commande : reload pour redémarrer et confirmer que tout fonctionne. I
