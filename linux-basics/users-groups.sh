@@ -1,4 +1,10 @@
-# add user -m = create home directory, -c = comment, -s = shell
+# check the logged in user
+whoami
+
+# change user
+su [userName]
+
+# add user [-m = create home directory, -c = comment, -s = shell] ** default user creation **
 sudo useradd -m -c "Nom complet" -s /bin/bash [userName]
 
 # change user password (if don't do this the user can't login)

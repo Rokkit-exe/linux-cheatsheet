@@ -1,0 +1,88 @@
+#<------------------------- pushing new repo to github ------------------------------------>
+
+# adding all changes
+git add -A
+
+# commit changes with comment [-m = comment]
+git commit -m "comment"
+
+# pushing changes to current branch
+git push
+
+# adding remote github repository
+git remote add origin <github-repo-url>
+
+# push changes to the github repository
+git push -u origin master
+
+# depending on the environment you might need to connect via SSH to push changes
+    # Generating an SSH key pair on your local machine
+    ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+
+    # you will need to go to ~/.ssh/id_rsa.pub and copy the key
+    # go to github settings and select "SSH and GPG keys" and add the key you just copyed
+
+#<------------------------- from existing github repo ------------------------------------>
+
+# cloning repository
+git clone https://github.com/<username>/<repository>.git
+
+# adding all changes
+git add -A
+
+# commit changes with comment [-m = comment]
+git commit -m "comment"
+
+# pushing changes to current branch
+git push
+
+# depending on the environment you might need to connect via SSH to push changes
+    # Generating an SSH key pair on your local machine
+    ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+
+    # you will need to go to ~/.ssh/id_rsa.pub and copy the key
+    # go to github settings and select "SSH and GPG keys" and add the key you just copyed
+
+
+#<------------------------- status and modification ------------------------------------>
+
+# show the status of the files in your repository (modified, added, deleted)
+git status
+
+# Shows a log of all the commits in your repository, including the commit message, author, and date.
+git log
+
+# Shows the differences between the current state of your repository and the last commit.
+git diff
+
+#<------------------------- trouble shooting ------------------------------------>
+
+# Temporarily saves changes that are not ready to be committed, allowing you to switch branches or perform other operations without losing your work.
+git stash 
+
+# Resets the repository to a previous commit, discarding any changes made since that commit.
+git reset 
+
+# Reverts a commit by creating a new commit that undoes the changes made in the original commit.
+git revert
+
+
+#<------------------------- branches commands ------------------------------------>
+
+# list all the branches in your repository
+git branch
+
+# switch branch 
+git checkout <branch-name>
+
+# creating a new branch
+git branch new-branch
+
+# deleting a branch
+git branch -d branch-name
+
+# merging the specified branch into the current open
+git merge branch-name
+
+
+

@@ -1,4 +1,5 @@
 #!/bin/bash
+# install vm-tools for virtual machines
 echo " For WMWare [1] \n For VirtualBox [2] \n For UTM [3]"
 read -p "Enter your choice: " choice
 

@@ -1,3 +1,6 @@
+#!/bin/bash
+
+# download speedtest-cli 
 echo would you like to install speedtest-cli? [y/n]
 read choice
 
