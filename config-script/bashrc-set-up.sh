@@ -12,4 +12,4 @@ echo installing bash-it
 echo installing atomic theme
 sed -i 's/'"$BASH_IT_THEME"'/atomic/g' ~/.bashrc
 
-
+sudo echo export BASH_IT_THEME="atomic" >> ~/.bashrc
